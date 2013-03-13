@@ -5,6 +5,7 @@ Apache Traffic Server (ATS) plugin to modify the URL used as the cache key by ad
 This is useful when ATS is running in reverse proxy mode and proxies several (ie hundreds or thousands) of hosts.
 Each host has a generation ID (genid) that's stored in a small embedded kytocabinet database.
 Without this plugin, the CacheUrl is set to the requested URL.  
+
 For example, if the requested url is  http://example.tld/foobar.css, then the CacheUrl is http://example.tld/foobar.css.
 With this plugin, the CacheUrl is set to http://example.tld.#/foobar.css, where # is an integer representing example.tld's genid.
 
@@ -26,14 +27,14 @@ scan is required.  You simply increment a single value in a kytocabinet database
 The solution is to not actually delete the files, but instead increment a counter in an embedded database local to each ATS server. 
 ats-plugin-cache-key-genid modifies the cache-key to include the host's genid.
 
-\Intercept incoming http requests
-\Hook just before the cache key is set
-\The cache key is effectively md5(url) or md5(http://host/path). Change it to md5(http://host.genid/path)
-	\Take the url
-	\Find the host
-	\Lookup the host's generation ID in an embeded, super fast, super lightweight, mostly|all in memory, key/value pair kyotocabinet database
-	\Make a newurl string by injecting the host's genid just after the host in the original url. ie http://foo.com/style.css becomes http://foo.com.2/style.css
-\Call TSCacheUrlSet with the newurl
+* Intercept incoming http requests
+* Hook just before the cache key is set
+* The cache key is effectively md5(url) or md5(http://host/path). Change it to md5(http://host.genid/path)
+** Take the url
+** Find the host
+** Lookup the host's generation ID in an embeded, super fast, super lightweight, mostly|all in memory, key/value pair kyotocabinet database
+** Make a newurl string by injecting the host's genid just after the host in the original url. ie http://foo.com/style.css becomes http://foo.com.2/style.css
+* Call TSCacheUrlSet with the newurl
 
 How do you accomplish the genid increment?  Below we give you the kytocabinet command to do so.  Presumably, you have some for of user interface where they request 
 a Clear Cache operation.  You must somehow relay this to your ATS server(s) and command then to increment that host's genid.  There are many designs available for this.
@@ -42,8 +43,8 @@ the scope of this write up.
 
 ## Requires
 
-/Apache Traffic Server 3.0 (http://trafficserver.apache.org/)
-/Kyto Cabinet (http://fallabs.com/kyotocabinet/)
+* Apache Traffic Server 3.0 (http://trafficserver.apache.org/)
+* Kyto Cabinet (http://fallabs.com/kyotocabinet/)
 
 ## to compile
 Assuming the ATS provided tsxs is in your PATH:
