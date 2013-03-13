@@ -11,6 +11,8 @@ With this plugin, the CacheUrl is set to http://example.tld.#/foobar.css, where 
 
 ## License
 
+Copyright &copy; 2013 Go Daddy Operating Company, LLC 
+
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
