@@ -60,8 +60,10 @@ the scope of this write up.
 
 ## Requires
 
-* Apache Traffic Server 3.0 (http://trafficserver.apache.org/)
+* Apache Traffic Server (http://trafficserver.apache.org/)
+	* Note: we used ATS 3.0 to build this, it may work with other versions.
 * Kyto Cabinet (http://fallabs.com/kyotocabinet/)
+	* Note: we used kyotocabinet-1.2.76 to build ours, it may work with other versions.
 
 ## to compile
 Assuming the ATS provided tsxs is in your PATH:
