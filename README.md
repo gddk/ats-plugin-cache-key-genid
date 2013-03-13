@@ -47,10 +47,10 @@ ats-plugin-cache-key-genid modifies the cache-key to include the host's genid.
 * Intercept incoming http requests
 * Hook just before the cache key is set
 * The cache key is effectively md5(url) or md5(http://host/path). Change it to md5(http://host.genid/path)
-** Take the url
-** Find the host
-** Lookup the host's generation ID in an embeded, super fast, super lightweight, mostly|all in memory, key/value pair kyotocabinet database
-** Make a newurl string by injecting the host's genid just after the host in the original url. ie http://foo.com/style.css becomes http://foo.com.2/style.css
+	* Take the url
+	* Find the host
+	* Lookup the host's generation ID in an embeded, super fast, super lightweight, mostly|all in memory, key/value pair kyotocabinet database
+	* Make a newurl string by injecting the host's genid just after the host in the original url. ie http://foo.com/style.css becomes http://foo.com.2/style.css
 * Call TSCacheUrlSet with the newurl
 
 How do you accomplish the genid increment?  Below we give you the kytocabinet command to do so.  Presumably, you have some for of user interface where they request 
